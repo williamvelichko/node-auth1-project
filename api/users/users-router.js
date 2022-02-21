@@ -11,9 +11,7 @@ router.get("/", restricted, (req, res, next) => {
     .then((users) => {
       res.status(200).json(users);
     })
-    .catch((err) => {
-      res.status(401).json({ message: "You shall not pass!" });
-    });
+    .catch(next);
 });
 
 // router.get("/session", (req, res, next) => {

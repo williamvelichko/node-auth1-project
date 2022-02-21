@@ -75,7 +75,7 @@ router.post(
   }
  */
 router.get("/logout", (req, res, next) => {
-  if (req.session) {
+  if (req.session.user) {
     req.session.destroy((err) => {
       if (err != null) {
         next({ status: 200, message: "no session" });
@@ -84,7 +84,7 @@ router.get("/logout", (req, res, next) => {
       }
     });
   } else {
-    req.end();
+    res.status(200).json({ message: "no session" });
   }
 });
 /**

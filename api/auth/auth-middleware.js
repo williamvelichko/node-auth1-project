@@ -9,7 +9,7 @@ const Users = require("../users/users-model");
   }
 */
 function restricted(req, res, next) {
-  if (req.session == null) {
+  if (req.session.user == null) {
     next({ status: 401, message: "You shall not pass!" });
   } else {
     next();
