@@ -10,7 +10,7 @@ const Users = require("../users/users-model");
 */
 function restricted(req, res, next) {
   if (req.session == null) {
-    next({ status: 401, message: "you shall not pass" });
+    next({ status: 401, message: "You shall not pass!" });
   } else {
     next();
   }
@@ -33,7 +33,7 @@ async function checkUsernameFree(req, res, next) {
   // } else
   //console.log(user);
   if (user) {
-    next({ status: 401, message: "Username Taken" });
+    next({ status: 422, message: "Username taken" });
   } else {
     req.user = user;
     next();
@@ -74,14 +74,14 @@ async function checkUsernameExists(req, res, next) {
 */
 async function checkPasswordLength(req, res, next) {
   const password = req.body.password;
-  const result = await Users.findBy({ password: password }).first();
+  //const result = await Users.findBy({ password: password }).first();
   if (
     !password ||
     typeof password != "string" ||
     !password.trim() ||
     password.length <= 3
   ) {
-    next({ status: 401, message: "Password must be longer than 3 chars" });
+    next({ status: 422, message: "Password must be longer than 3 chars" });
   } else {
     req.user = {
       username: req.body.username.trim(),

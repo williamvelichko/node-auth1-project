@@ -12,7 +12,7 @@ router.get("/", restricted, (req, res, next) => {
       res.status(200).json(users);
     })
     .catch((err) => {
-      next(err);
+      res.status(401).json({ message: "You shall not pass!" });
     });
 });
 

@@ -21,7 +21,7 @@ const authRouter = require("./auth/auth-router");
 const server = express();
 
 const sessionConfig = {
-  name: "node_auth1_module",
+  name: "chocolatechip",
   secret: "keep it to yourself",
   cookie: {
     maxAge: 1000 * 60 * 60 * 24,
