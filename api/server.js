@@ -20,19 +20,31 @@ const authRouter = require("./auth/auth-router");
 
 const server = express();
 
-const sessionConfig = {
-  name: "chocolatechip",
-  secret: "keep it to yourself",
-  cookie: {
-    maxAge: 1000 * 60 * 60 * 24,
-    secure: false,
-    httpOnly: true,
+// const sessionConfig = {
+//   name: "chocolatechip",
+//   secret: "keep it to yourself",
+//   resave: false,
+//   saveUnitialized: false,
+//   cookie: {
+//     maxAge: 1000 * 60 * 60 * 24,
+//     secure: false,
+//     httpOnly: true,
+//   },
+// };
+
+server.use(
+  session({
+    name: "chocolatechip",
+    secret: "keep it to yourself",
     resave: false,
     saveUnitialized: false,
-  },
-};
-
-server.use(session(sessionConfig));
+    cookie: {
+      maxAge: 1000 * 60 * 60 * 24,
+      secure: false,
+      httpOnly: true,
+    },
+  })
+);
 server.use(helmet());
 server.use(express.json());
 server.use(cors());

@@ -31,7 +31,7 @@ async function checkUsernameFree(req, res, next) {
   // if (!username || typeof username != "string" || !username.trim()) {
   //   next({ status: 401, message: "username Required" });
   // } else
-  //console.log(user);
+  console.log(user);
   if (user) {
     next({ status: 422, message: "Username taken" });
   } else {
@@ -55,7 +55,7 @@ async function checkUsernameExists(req, res, next) {
   // if (!username || typeof username != "string" || !username.trim()) {
   //   next({ status: 401, message: "username Required" });
   // } else
-  //console.log(user);
+
   if (user == null) {
     next({ status: 401, message: "Invalid credentials" });
   } else {

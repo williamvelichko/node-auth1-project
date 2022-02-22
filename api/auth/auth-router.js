@@ -23,6 +23,17 @@ router.post(
     }
   }
 );
+
+router.post("/login", mid.checkUsernameExists, (req, res, next) => {
+  const password = req.body.password;
+  if (bcrypt.compareSync(password, req.user.password) == true) {
+    req.session.user = req.user;
+
+    res.json({ message: `Welcome ${req.body.username}!` });
+  } else {
+    next({ status: 401, message: "invalid credentials" });
+  }
+});
 /**
   1 [POST] /api/auth/register { "username": "sue", "password": "1234" }
 
@@ -45,20 +56,7 @@ router.post(
     "message": "Password must be longer than 3 chars"
   }
  */
-router.post(
-  "/login",
-  mid.checkUsernameExists,
 
-  (req, res, next) => {
-    const password = req.body.password;
-    if (bcrypt.compareSync(password, req.user.password) == true) {
-      req.session.user = req.user;
-      res.json({ message: `Welcome ${req.body.username}!` });
-    } else {
-      next({ status: 401, message: "invalid credentials" });
-    }
-  }
-);
 /**
   2 [POST] /api/auth/login { "username": "sue", "password": "1234" }
 
