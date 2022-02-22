@@ -37,7 +37,7 @@ server.use(
     name: "chocolatechip",
     secret: "keep it to yourself",
     resave: false,
-    saveUnitialized: false,
+    saveUninitialized: false,
     cookie: {
       maxAge: 1000 * 60 * 60 * 24,
       secure: false,
